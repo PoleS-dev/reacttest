@@ -2,73 +2,58 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Nav() {
-
-
-    const header=[
-
+  const navItems = [
+    {
+      label: 'Accueil',
+      slug: '/',
+    },
+    {
+      label: 'A propos',
+      slug: '/apropos',
+    },
+    {
+      label: 'Catégories',
+      children: [
         {
-            slug:"/",
-            page:"Accueil"
+          label: 'Film',
+          slug: '/categorie/film',
         },
         {
-            slug:"/apropos",
-            page:"A propos"
+          label: 'Documentaire',
+          slug: '/categorie/documentaire',
         },
-         {
-            categories:[
-                {
-                    slug:"/categorie/film",
-                    page:"Film"
-                },
-                {
-                    slug:"/categorie/documentaire",
-                    page:"Documentaire"
-                },
-            ]
+      ],
+    },
+    {
+      label: 'Chaussures',
+      children: [
+        {
+          label: 'Chaussures',
+          slug: '/chaussures/',
         },
-    ]
+      ],
+    },
+  ]
 
+  return (
+    <nav>
+      {navItems.map((item) =>
+        item.children ? (
+          <details key={item.label}>
+            <summary>{item.label}</summary>
 
-    return (
-        <nav>
-
-
-{header.map((item,index)=>{
-    return(
-
-        <>
-        <Link to={item.slug} key={index}>{item.page}</Link>
-        {item.categories ? 
-
-          <details>
-
-            <summary>Categories</summary>
-
-
-            {item.categories.map((category,index)=>{
-                return(
-                    <div>
-                    <Link to={category.slug} key={index}>
-                        
-                       {category.page}
-                        
-                        
-                   </Link>
-                   </div>
-                        )
-            })}
-
+            {item.children.map((child) => (
+              <div key={child.slug}>
+                <Link to={child.slug}>{child.label}</Link>
+              </div>
+            ))}
           </details>
-
-         : null}
-   
-        </>
-    )
-})}
-
-
-
-
-        </nav>
-    )
+        ) : (
+          <Link key={item.slug} to={item.slug}>
+            {item.label}
+          </Link>
+        )
+      )}
+    </nav>
+  )
 }

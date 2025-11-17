@@ -8,7 +8,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Film from './pages/film'
 import Documentaire from './pages/documentaire'
-
+import Chuassure from './pages/chuassure'
 function App() {
  
 
@@ -29,6 +29,7 @@ function App() {
 <Route path="/apropos" element={<Apropos/>} />
 <Route path="/categorie/film" element={<Film/>} />
 <Route path="/categorie/documentaire" element={<Documentaire/>} />
+<Route path="/chaussures" element={<Chuassure/>} />
 </Routes>
 </main>
 
